@@ -25,6 +25,7 @@ body {
     margin: 0 auto;
     padding: 0;
 }
+
 /* Small */
 @media (min-width: 768px) {
     .container {
