@@ -118,6 +118,7 @@ header nav ul a {
     padding-top: 30px;
     padding-bottom: 60px;
     background-color: var(--secondary-color);
+    min-height: calc(100vh - 73px); 
 }
 
 .blog .heading {
@@ -135,7 +136,6 @@ header nav ul a {
     grid-template-columns: repeat(3, 320px);
     gap: 20px;
     justify-content: center;
-    align-items: center;
 }
 
 /* Medium */
@@ -158,6 +158,14 @@ header nav ul a {
     border-radius: 10px;
     padding: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.blog .cards .card:hover {
+    border-color: #384147;
+    transition: border-color 0.3s;
 }
 
 .blog .cards .card .image-placeholder {
@@ -175,6 +183,7 @@ header nav ul a {
 .blog .cards .card .info {
     margin: 15px 0 0;
     color: var(--main-color);
+    flex: 1;
 }
 
 .blog .cards .card .info h3 {
@@ -182,13 +191,248 @@ header nav ul a {
     font-size: 23px;
     margin-bottom: 10px; 
     text-transform: capitalize;
+    overflow: hidden;
 }
 
 .blog .cards .card .info p {
     line-height: 1.6;
     font-size: 16px;
+    overflow: hidden;
+}
+
+.blog .cards .card .delete-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: transparent;
+    border: 1.5px solid #f0b8b8;
+    color: #e05c5c;
+    border-radius: 6px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.blog .cards .card .delete-btn:hover {
+    background-color: #e05c5c;
+    color: #fff;
+}
+
+/* When blog section is empty */
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: #7a8390;
+}
+
+.empty-state i {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: block;
+    opacity: 0.4;
+}
+
+.empty-state p {
+    font-size: 18px;
 }
 /* End Blog */
+
+/* Start Delete Confirmation Modal */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background-color: #fff;
+    border-radius: 14px;
+    padding: 40px 36px;
+    max-width: 440px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    transform: translateY(20px);
+    transition: transform 0.3s;
+}
+
+.modal-overlay.active .modal {
+    transform: translateY(0);
+}
+
+.modal .modal-icon {
+    width: 64px;
+    height: 64px;
+    background-color: #fff4f4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.modal .modal-icon i {
+    font-size: 28px;
+    color: #e05c5c;
+}
+
+.modal h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #384147;
+    margin-bottom: 12px;
+}
+
+.modal p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #7a8390;
+    margin-bottom: 28px;
+}
+
+.modal p strong {
+    color: #384147;
+    font-weight: 600;
+}
+
+.modal .modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#modal-confirm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: #e05c5c;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#modal-confirm-btn:hover:not(:disabled) {
+    background-color: #c94a4a;
+}
+
+#modal-confirm-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#modal-cancel-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    background-color: transparent;
+    color: #384147;
+    border: 2px solid #EBECF0;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#modal-cancel-btn:hover {
+    background-color: #EBECF0;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+/* End Delete Confirmation Modal */
+
+/* Start Blog Detail Modal */
+.detail-modal {
+    max-width: 560px;
+    position: relative;
+    text-align: left;
+    max-height: 80vh;       
+    overflow-y: auto; 
+    overflow-x: hidden;  
+    word-break: break-word; 
+}
+
+.detail-modal .modal-icon {
+    background-color: #f0f2f4;
+}
+
+.detail-modal .modal-icon i {
+    color: #384147;
+    font-size: 28px;
+}
+
+.detail-modal h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+}
+
+.detail-modal p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #7a8390;
+    margin-bottom: 0;       
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    background: #f0f2f4;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #384147;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.modal-close-btn:hover {
+    background-color: #EBECF0;
+}
+
+.blog .cards .card {
+    cursor: pointer;
+}
+
+.blog .cards .card .delete-btn {
+    cursor: pointer;        
+}
+/* End Blog Detail Modal */
 
 /* Start Footer */
 footer {
@@ -217,3 +461,139 @@ footer .social-links i{
     font-size: 20px;
 }
 /* End Footer */
+
+header nav ul a.active-link {
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* Add Blog Section */
+.add-blog-section {
+    min-height: calc(100vh - 73px); /* fill the screen below header */
+    background-color: #f7f8fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.add-blog-inner {
+    background-color: #fff;
+    border-radius: 14px;
+    border: 2px solid #EBECF0;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    padding: 48px 44px;
+    width: 100%;
+    max-width: 620px;
+}
+
+@media (max-width: 768px) {
+    .add-blog-inner {
+        padding: 32px 24px;
+    }
+}
+
+.add-blog-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #384147;
+    margin-bottom: 6px;
+}
+
+.add-blog-subtitle {
+    font-size: 15px;
+    color: #7a8390;
+    margin-bottom: 36px;
+}
+
+/* Form */
+.blog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #384147;
+}
+
+.form-group input,
+.form-group textarea {
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    color: #384147;
+    background-color: #fff;
+    border: 2px solid #EBECF0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #c0c4cc;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #384147;
+    box-shadow: 0 0 0 3px rgba(56, 65, 71, 0.1);
+}
+
+.form-group input.invalid,
+.form-group textarea.invalid {
+    border-color: #e05c5c;
+    box-shadow: 0 0 0 3px rgba(224, 92, 92, 0.1);
+}
+
+.field-error {
+    font-size: 13px;
+    font-weight: 500;
+    color: #e05c5c;
+    display: none;
+}
+
+.field-error.visible {
+    display: block;
+}
+
+/* Submit button */
+#form-submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    align-self: flex-start;
+    padding: 13px 28px;
+    background-color: #384147;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#form-submit-btn:hover:not(:disabled) {
+    background-color: #2b3338;
+    transform: translateY(-2px);
+}
+
+#form-submit-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+}

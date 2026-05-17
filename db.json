@@ -1,0 +1,35 @@
+{
+  "blog": [
+    {
+      "title": "Getting Started With Web Development",
+      "description": "Web development is a broad field encompassing everything from building simple static pages to complex web applications This post covers the core technologies every beginner should learn first",
+      "id": "feLQQVniUKU"
+    },
+    {
+      "title": "Understanding CSS Grid Layout",
+      "description": "CSS Grid is a powerful two dimensional layout system that makes it easy to create complex responsive designs Learn how rows and columns work together to build modern web interfaces",
+      "id": "oznGZKQZtGg"
+    },
+    {
+      "title": "JavaScript Best Practices",
+      "description": "Writing clean maintainable JavaScript is a skill that separates good developers from great ones This guide covers naming conventions module patterns and error handling techniques you should adopt",
+      "id": "KxO4ob3fYUI"
+    },
+    {
+      "title": "Responsive Design Fundamentals",
+      "description": "Responsive design ensures your website looks great on every screen size Discover how media queries flexible grids and fluid images combine to create seamless cross device experiences",
+      "id": "Ztj166c2s8I"
+    },
+    {
+      "title": "Introduction to REST APIs",
+      "description": "REST APIs are the backbone of modern web communication This post explains how HTTP methods work what endpoints are and how to consume data from a backend server in your frontend application",
+      "id": "DatigSKjxGE"
+    },
+    {
+      "title": "Version Control With Git",
+      "description": "Git is an essential tool for every developer Understanding branches commits merges and pull requests will make you a more effective collaborator and protect your codebase from costly mistakes",
+      "id": "-MHObN0LX-E"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

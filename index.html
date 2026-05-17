@@ -29,6 +29,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#blog">Blog</a></li>
+                    <li><a href="add-blog.html">Add Blog</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -38,7 +39,7 @@
     <!-- Start Main -->
     <main class="blog" id="blog">
         <h1 class="heading">BLOG</h1>
-        <div class="cards">
+        <div class="cards" id="cards-container">
             <div class="card">
                 <div class="image-placeholder">
                     <i class="fa-regular fa-image"></i>
@@ -102,7 +103,39 @@
         </div>
     </main>
     <!-- End Main -->
-
+    <!-- Start Delete Confirmation Modal -->
+    <div class="modal-overlay" id="delete-modal">
+        <div class="modal">
+            <div class="modal-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h2>Delete Blog Post?</h2>
+            <p>You are about to permanently delete <strong id="modal-blog-title"></strong>. This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button id="modal-confirm-btn">
+                    <i class="fa-solid fa-trash"></i> Yes, Delete
+                </button>
+                <button id="modal-cancel-btn">
+                    I Changed My Mind
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- End Delete Confirmation Modal -->
+    <!-- Start Blog Detail Modal -->
+    <div class="modal-overlay" id="detail-modal">
+        <div class="modal detail-modal">
+            <button class="modal-close-btn" id="detail-modal-close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="modal-icon">
+                <i class="fa-regular fa-image"></i>
+            </div>
+            <h2 id="detail-modal-title"></h2>
+            <p id="detail-modal-description"></p>
+        </div>
+    </div>
+    <!-- End Blog Detail Modal -->
     <!-- Start Footer -->
     <footer id="contact">
         <h3>Footer</h3>
@@ -113,5 +146,6 @@
         </div>
     </footer>
     <!-- End Footer -->
+     <script src="main.js"></script>
 </body>
 </html>
