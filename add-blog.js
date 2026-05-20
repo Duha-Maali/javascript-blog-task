@@ -18,31 +18,37 @@ const API = {
 };
 
 const VALIDATION = {
-  rules: {
-    title: (value) => {
-      const trimmed = value.trim();
-      if (!trimmed)
-        return "Title is required.";
-      if (!/^[A-Za-z ]+$/.test(trimmed))
-        return "Only English letters and spaces are allowed.";
-      if (!/^[A-Z]/.test(trimmed))
-        return "The first letter must be capitalised.";
-      if (trimmed.length >= 50)
-        return "Title must be less than 50 characters.";
-      return null; // valid
+  config: {
+    title: {
+      required: "Title is required.",
+      invalidChars: "Only English letters and spaces are allowed.",
+      firstCapital: "The first letter must be capitalised.",
+      maxLength: 50,
+      maxLengthMsg: "Title must be less than 50 characters.",
     },
-
-    description: (value) => {
-      const trimmed = value.trim();
-      if (!trimmed)
-        return "Description is required.";
-      if (!/^[A-Za-z ]+$/.test(trimmed))
-        return "Only English letters and spaces are allowed.";
-      if (trimmed.length >= 1000)
-        return "Description must be less than 1000 characters.";
-      return null; // valid
+    description: {
+      required: "Description is required.",
+      invalidChars: "Only English letters and spaces are allowed.",
+      maxLength: 1000,
+      maxLengthMsg: "Description must be less than 1000 characters.",
     },
   },
+  
+  validate: (type, value) => {
+    const trimmed = value.trim();
+    const rules = VALIDATION.config[type];
+
+    if (!trimmed)
+      return rules.required;
+    if (!/^[A-Za-z ]+$/.test(trimmed))
+      return rules.invalidChars;
+    if (type === "title" && !/^[A-Z]/.test(trimmed))
+      return rules.firstCapital;
+    if (trimmed.length >= rules.maxLength)
+      return rules.maxLengthMsg;
+
+    return null; // valid
+    },
 
   // Show or clear the error message under a field
   setError: (fieldName, errorMsg) => {
@@ -62,21 +68,16 @@ const VALIDATION = {
 
   // Validate one field, update its UI, return true if valid
   validateField: (fieldName, value) => {
-    const errorMsg = VALIDATION.rules[fieldName](value);
-    VALIDATION.setError(fieldName, errorMsg);
-    return errorMsg === null;
-  },
+        const errorMsg = VALIDATION.validate(fieldName, value);
+        VALIDATION.setError(fieldName, errorMsg);
+        return errorMsg === null;
+    },
 
-  // Check both fields and enable/disable submit button
   updateSubmitButton: () => {
-    const titleError = VALIDATION.rules.title(
-      document.getElementById("form-title").value
-    );
-    const descError = VALIDATION.rules.description(
-      document.getElementById("form-description").value
-    );
-    document.getElementById("form-submit-btn").disabled =
-      titleError !== null || descError !== null;
+      const titleError = VALIDATION.validate("title", document.getElementById("form-title").value);
+      const descError = VALIDATION.validate("description", document.getElementById("form-description").value);
+      document.getElementById("form-submit-btn").disabled =
+          titleError !== null || descError !== null;
   },
 };
 
