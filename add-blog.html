@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Blog</title>
+    <!-- Font Awesome Library -->
+    <link rel="stylesheet" href="css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <!-- Render All Elements Normally -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <!-- Main CSS File-->
+    <link rel="stylesheet" href="css/master.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">BLOG</div>
+        <nav>
+            <i class="fa-solid fa-bars"></i>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="add-blog.html" class="active-link">Add Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Add Blog Section -->
+    <section class="add-blog-section">
+        <div class="add-blog-inner">
+
+            <div class="add-blog-header">
+                <h1 class="add-blog-title">Add New Blog</h1>
+                <p class="add-blog-subtitle">Fill in the details below to publish a new post.</p>
+            </div>
+
+            <form class="blog-form" id="blog-form" novalidate>
+
+                <!-- Title -->
+                <div class="form-group">
+                    <label for="form-title">Title</label>
+                    <input
+                        type="text"
+                        id="form-title"
+                        name="title"
+                        placeholder="My First Blog Post"
+                        autocomplete="off"
+                    />
+                    <span class="field-error" id="title-error"></span>
+                </div>
+
+                <!-- Description -->
+                <div class="form-group">
+                    <label for="form-description">Description</label>
+                    <textarea
+                        id="form-description"
+                        name="description"
+                        placeholder="Write your blog content here..."
+                        rows="6"
+                    ></textarea>
+                    <span class="field-error" id="description-error"></span>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" id="form-submit-btn" disabled>
+                    <i class="fa-solid fa-paper-plane"></i> Publish Post
+                </button>
+
+            </form>
+
+        </div>
+    </section>
+
+    <script src="add-blog.js"></script>
+
+</body>
+</html>
